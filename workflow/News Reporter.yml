@@ -1,0 +1,510 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: News Reporter
+  use_icon_as_answer_icon: false
+dependencies: []
+kind: app
+version: 0.6.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: http-request
+      id: 1783420678501-source-1783420917220-target
+      selected: false
+      source: '1783420678501'
+      sourceHandle: source
+      target: '1783420917220'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 1783420917220-source-1783427019663-target
+      selected: false
+      source: '1783420917220'
+      sourceHandle: source
+      target: '1783427019663'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1783427019663-true-1783427285056-target
+      selected: false
+      source: '1783427019663'
+      sourceHandle: 'true'
+      target: '1783427285056'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1783427019663-b796236e-2d86-40d6-a609-6df40d0babb4-1783427495473-target
+      selected: false
+      source: '1783427019663'
+      sourceHandle: b796236e-2d86-40d6-a609-6df40d0babb4
+      target: '1783427495473'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1783427019663-false-1783427584791-target
+      selected: false
+      source: '1783427019663'
+      sourceHandle: 'false'
+      target: '1783427584791'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1783427285056-source-1783421621373-target
+      source: '1783427285056'
+      sourceHandle: source
+      target: '1783421621373'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1783427495473-source-1783421621373-target
+      source: '1783427495473'
+      sourceHandle: source
+      target: '1783421621373'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1783427584791-source-1783421621373-target
+      source: '1783427584791'
+      sourceHandle: source
+      target: '1783421621373'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: ''
+          hint: ''
+          label: source
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: source
+        - default: ''
+          hint: ''
+          label: category
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: category
+        - default: ''
+          hint: ''
+          label: language
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: language
+        - default: ''
+          hint: ''
+          label: today
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: today
+        - default: ''
+          hint: ''
+          label: weekAgo
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: weekAgo
+      height: 213
+      id: '1783420678501'
+      position:
+        x: -36.43163448313925
+        y: 617.8478036562199
+      positionAbsolute:
+        x: -36.43163448313925
+        y: 617.8478036562199
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config:
+            api_key: YOUR_TAVILY_KEY
+            type: bearer
+          type: api-key
+        body:
+          data:
+          - id: key-value-116
+            key: ''
+            type: text
+            value: "{\n    \"query\": \"{{#1783420678501.source#}} {{#1783420678501.category#}}\
+              \ news from {{#1783420678501.weekAgo#}} to {{#1783420678501.today#}}\"\
+              ,\n    \"search_depth\": \"advanced\",\n    \"max_results\": 5\n  }"
+          type: json
+        desc: 搜索新闻
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求-Tavily搜索
+        type: http-request
+        url: https://api.tavily.com/search
+        variables: []
+      height: 165
+      id: '1783420917220'
+      position:
+        x: 244.5731011266442
+        y: 638.8478036562199
+      positionAbsolute:
+        x: 244.5731011266442
+        y: 638.8478036562199
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        outputs:
+        - value_selector:
+          - '1783427584791'
+          - text
+          value_type: string
+          variable: text
+        - value_selector:
+          - '1783427495473'
+          - text
+          value_type: string
+          variable: text_1
+        - value_selector:
+          - '1783427285056'
+          - text
+          value_type: string
+          variable: text_2
+        selected: false
+        title: 输出
+        type: end
+      height: 140
+      id: '1783421621373'
+      position:
+        x: 1334.608251235564
+        y: 672.0093928090112
+      positionAbsolute:
+        x: 1334.608251235564
+        y: 672.0093928090112
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 4b2e69fe-0882-45af-ac80-26be11ac9d40
+            value: Politics
+            varType: string
+            variable_selector:
+            - '1783420678501'
+            - category
+          - comparison_operator: is
+            id: 235d4761-d99c-4241-9570-2c2de572fd01
+            value: Finance
+            varType: string
+            variable_selector:
+            - '1783420678501'
+            - category
+          - comparison_operator: is
+            id: 49d098d7-1504-4eea-9155-9a42d50a7885
+            value: Health
+            varType: string
+            variable_selector:
+            - '1783420678501'
+            - category
+          id: 'true'
+          logical_operator: or
+        - case_id: b796236e-2d86-40d6-a609-6df40d0babb4
+          conditions:
+          - comparison_operator: contains
+            id: 58680aa8-67ae-4cc6-9774-1b54ebbb739e
+            value: Technology
+            varType: string
+            variable_selector:
+            - '1783420678501'
+            - category
+          id: b796236e-2d86-40d6-a609-6df40d0babb4
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 320
+      id: '1783427019663'
+      position:
+        x: 551.5433487507386
+        y: 532.0063117657324
+      positionAbsolute:
+        x: 551.5433487507386
+        y: 532.0063117657324
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.8
+          mode: chat
+          name: moonshot-v1-32k
+          provider: langgenius/moonshot/moonshot
+        prompt_template:
+        - id: c99080c2-49f3-4786-91b5-9695b593f21d
+          role: system
+          text: "You are a college student completing a daily English news assignment.\
+            \ You are reading a {{#1783420678501.category#}} article. Maintain an\
+            \ analytical, evidence-based tone. Be precise and objective. Do NOT fabricate\n\
+            \  anything.\n\n  ## Output JSON structure\n  {\n    \"source\": \"the\
+            \ news outlet name\",\n    \"date\": \"article publication date, e.g.\
+            \ 'Jul 7, 2026'\",\n    \"headline\": \"original headline in English\"\
+            ,\n    \"headline_zh\": \"headline in natural Chinese\",\n    \"summary\"\
+            : \"2-3 factual sentences covering what happened, who is involved, why\
+            \ it matters. Be precise — include key data or policy details if present.\"\
+            ,\n    \"summary_zh\": \"summary in natural Chinese\",\n    \"personal_reflection\"\
+            : \"personal thoughts in English — focus on the broader implications:\
+            \ how does this affect people, markets, or policy?\",\n    \"personal_reflection_zh\"\
+            : \"reflection in casual, natural Chinese — use 我, diary tone\",\n   \
+            \ \"url\": \"the article URL\"\n  }"
+        - id: 992dead1-cb4b-4746-a22a-4019faaad237
+          role: user
+          text: "Search results from {{#1783420678501.source#}} about {{#1783420678501.category#}}:\n\
+            \  {{#1783420917220.body#}}\n\n  Today is {{#1783420678501.today#}}. Only use\
+            \ articles published within the last 7 days ({{#1783420678501.weekAgo#}}\
+            \ to {{#1783420678501.today#}}).\n\n  Pick the ONE most relevant and recent\
+            \ article, then write the report in JSON. Output ONLY the JSON object."
+        selected: false
+        title: 'LLM-严肃（Politics / Finance / Health）'
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1783427285056'
+      position:
+        x: 847.113120763867
+        y: 504.29664563950166
+      positionAbsolute:
+        x: 847.113120763867
+        y: 504.29664563950166
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.8
+          mode: chat
+          name: moonshot-v1-32k
+          provider: langgenius/moonshot/moonshot
+        prompt_template:
+        - id: 24c62f2b-0674-4f12-84ca-1c82e7a93a33
+          role: system
+          text: "You are a college student completing a daily English news assignment.\
+            \ You are reading a Technology article. Focus on innovation — what's new,\
+            \ how it works, and why it matters for the industry. Be curious and\n\
+            \   engaged. Do NOT fabricate anything.\n\n  ## Output JSON structure\n\
+            \  {\n    \"source\": \"the news outlet name\",\n    \"date\": \"article\
+            \ publication date, e.g. 'Jul 7, 2026'\",\n    \"headline\": \"original\
+            \ headline in English\",\n    \"headline_zh\": \"headline in natural Chinese\"\
+            ,\n    \"summary\": \"2-3 factual sentences covering the core tech, the\
+            \ company/people behind it, and the market or user impact. Include technical\
+            \ specifics if available.\",\n    \"summary_zh\": \"summary in natural\
+            \ Chinese\",\n    \"personal_reflection\": \"personal thoughts in English\
+            \ — react to the tech itself: is it impressive? overhyped? how might it\
+            \ change daily life?\",\n    \"personal_reflection_zh\": \"reflection\
+            \ in casual, natural Chinese — use 我, diary tone\",\n    \"url\": \"the\
+            \ article URL\"\n  }"
+        - id: fe9b5fa5-4cef-40e7-a48e-994729a11b6e
+          role: user
+          text: "Search results from {{#1783420678501.source#}} about {{#1783420678501.category#}}:\n\
+            \  {{#1783420917220.body#}}\n\n  Today is {{#1783420678501.today#}}. Only use\
+            \ articles published within the last 7 days ({{#1783420678501.weekAgo#}}\
+            \ to {{#1783420678501.today#}}).\n\n  Pick the ONE most relevant and recent\
+            \ article, then write the report in JSON. Output ONLY the JSON object."
+        selected: false
+        title: 'LLM-科技（Technology）'
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1783427495473'
+      position:
+        x: 847.113120763867
+        y: 699.5838164338902
+      positionAbsolute:
+        x: 847.113120763867
+        y: 699.5838164338902
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.8
+          mode: chat
+          name: moonshot-v1-32k
+          provider: langgenius/moonshot/moonshot
+        prompt_template:
+        - id: 07b5f8f9-167b-4f40-8b25-0b70913e2324
+          role: system
+          text: "You are a college student completing a daily English assignment.\
+            \ You are reading an Entertainment or Sports article. Keep the tone light,\
+            \ engaging, and personal — like telling a friend about something\n  interesting\
+            \ you just read. Do NOT fabricate anything.\n\n  ## Output JSON structure\n\
+            \  {\n    \"source\": \"the news outlet name\",\n    \"date\": \"article\
+            \ publication date, e.g. 'Jul 7, 2026'\",\n    \"headline\": \"original\
+            \ headline in English\",\n    \"headline_zh\": \"headline in natural Chinese\"\
+            ,\n    \"summary\": \"2-3 sentences covering the key event, the main people/teams\
+            \ involved, and why people are talking about it.\",\n    \"summary_zh\"\
+            : \"summary in natural Chinese\",\n    \"personal_reflection\": \"personal\
+            \ thoughts in English — react naturally: were you surprised? entertained?\
+            \ does this change how you see the artist/team/sport?\",\n    \"personal_reflection_zh\"\
+            : \"reflection in casual, natural Chinese — use 我, diary tone, like chatting\
+            \ with a friend\",\n    \"url\": \"the article URL\"\n  }"
+        - id: bf67c33a-0453-4cf7-b834-9b97b085da2c
+          role: user
+          text: "Search results from {{#1783420678501.source#}} about {{#1783420678501.category#}}:\n\
+            \  {{#1783420917220.body#}}\n\n  Today is {{#1783420678501.today#}}. Only use\
+            \ articles published within the last 7 days ({{#1783420678501.weekAgo#}}\
+            \ to {{#1783420678501.today#}}).\n\n  Pick the ONE most relevant and recent\
+            \ article, then write the report in JSON. Output ONLY the JSON object."
+        selected: false
+        title: 'LLM-轻松（Entertainment / Sports）'
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1783427584791'
+      position:
+        x: 852.391152406959
+        y: 852.6467340835459
+      positionAbsolute:
+        x: 852.391152406959
+        y: 852.6467340835459
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    viewport:
+      x: -5.991695425058424
+      y: -250.18539011570817
+      zoom: 0.7578582832551989
+  rag_pipeline_variables: []
