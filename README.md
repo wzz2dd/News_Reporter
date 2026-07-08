@@ -28,7 +28,7 @@
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/你的用户名/news-agent.git
+git clone https://github.com/wzz2dd/News_Reporter.git
 cd news-agent
 npm install
 ```
