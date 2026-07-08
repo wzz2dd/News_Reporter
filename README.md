@@ -20,7 +20,7 @@
 | 前端 | React 19 + Vite |
 | AI 编排 | Dify Workflow（条件分支 + LLM） |
 | 新闻搜索 | Tavily Search API |
-| 大模型 | GPT-4o / Claude 3.5 Sonnet（通过 Dify 调用） |
+| 大模型 | Moonshot / GPT-4o / Claude 等（Dify 内可切换） |
 | 存储 | localStorage（历史记录） |
 
 ## 快速开始
@@ -28,8 +28,8 @@
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/你的用户名/news-agent.git
-cd news-agent
+git clone https://github.com/wzz2dd/News_Reporter.git
+cd News_Reporter
 npm install
 ```
 
@@ -86,22 +86,18 @@ Start → Tavily HTTP Request → IF/ELSE（按类别分支）
                                       End
 ```
 
-工作流已导出为 `workflow/News Reporter.yml`，可直接导入 Dify。完整 Prompt 和设计思路见 `docs/PRODUCT_PORTFOLIO.md`。
+工作流已导出为 `workflow/News Reporter.yml`，可直接导入 Dify。
 
 ## 项目结构
 
 ```
-news-agent/
-├── docs/
-│   ├── 竞品分析.md          # 竞品分析文档
-│   └── PRODUCT_PORTFOLIO.md # 产品作品集
+News_Reporter/
 ├── workflow/
 │   └── News Reporter.yml    # Dify 工作流 DSL 文件
 ├── src/
 │   ├── App.jsx              # 主应用组件
 │   ├── main.jsx             # 入口文件
 │   └── styles.css           # 全局样式
-├── assets/                   # 截图资源
 ├── index.html
 ├── package.json
 ├── vite.config.js
