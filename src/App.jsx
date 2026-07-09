@@ -8,7 +8,7 @@ const HISTORY_KEY = 'news_reporter_history'
 
 const t = {
   en: {
-    appTitle: 'Daily Word Reporter',
+    appTitle: 'News for Students',
     langToggle: '中',
     sectionTitle: 'Select Authoritative Source / Category',
     sourceLabel: 'AUTHORITATIVE SOURCES',
@@ -28,7 +28,7 @@ const t = {
     privacy: 'Privacy Policy',
     terms: 'Terms of Service',
     contact: 'Contact Support',
-    copy: '© 2024 Daily News Reporter. Driven by Visionary AI.',
+    copy: '© 2024 News for Students. Driven by Visionary AI.',
     defaultHeadline: 'Pick a source and category, then generate your report',
     defaultSummary:
       'Your report will appear here after you click Generate Document. The output includes the source, date, concise summary, and a natural personal reflection.',

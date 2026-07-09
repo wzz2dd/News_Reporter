@@ -1,4 +1,4 @@
-# Daily Word Reporter
+# News for Students
 
 一个 AI 驱动的每日英语新闻报告生成器。选择权威来源和新闻类别，一键生成包含新闻摘要和个人反思的双语报告。
 
